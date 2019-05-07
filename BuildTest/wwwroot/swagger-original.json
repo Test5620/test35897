@@ -1,0 +1,71 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "",
+    "version" : "1.0.0",
+    "title" : "Pushover Messenger"
+  },
+  "host" : "www.sample.org",
+  "basePath" : "/v1",
+  "tags" : [ {
+    "name" : "Message",
+    "description" : "Send a message to a user via a Pushover app"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/message" : {
+      "post" : {
+        "tags" : [ "message" ],
+        "summary" : "Send a message to a user via a Pushover app",
+        "description" : "",
+        "operationId" : "message",
+        "consumes" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Message object that needs to be sent",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Message"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Message sent"
+          },
+          "404" : {
+            "description" : "An application token or a user token provided is invalid"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Message" : {
+      "type" : "object",
+      "required" : [ "appToken", "message", "userKey" ],
+      "properties" : {
+        "message" : {
+          "type" : "string",
+          "description" : "A message to be sent"
+        },
+        "appToken" : {
+          "type" : "string",
+          "description" : "A Pushover app to be used to send the message"
+        },
+        "userKey" : {
+          "type" : "string",
+          "description" : "A user key which represents a user to send the message to"
+        }
+      },
+      "xml" : {
+        "name" : "Message"
+      },
+      "example" : {
+        "appToken" : "appToken",
+        "message" : "message",
+        "userKey" : "userKey"
+      }
+    }
+  }
+}
